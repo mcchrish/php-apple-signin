@@ -23,7 +23,7 @@ class ASDecoder {
      * @param string $identityToken
      * @return object|null
      */
-    public static function getAppleSignInPayload(string $identityToken) : ?object
+    public static function getAppleSignInPayload(string $identityToken)
     {
         $identityPayload = self::decodeIdentityToken($identityToken);
         return new ASPayload($identityPayload);
@@ -35,7 +35,7 @@ class ASDecoder {
      * @param string $identityToken
      * @return object
      */
-    public static function decodeIdentityToken(string $identityToken) : object {
+    public static function decodeIdentityToken(string $identityToken) {
         $publicKeyKid = JWT::getPublicKeyKid($identityToken);
 
         $publicKeyData = self::fetchPublicKey($publicKeyKid);
@@ -55,7 +55,7 @@ class ASDecoder {
      * @param string $publicKeyKid
      * @return array
      */
-    public static function fetchPublicKey(string $publicKeyKid) : array {
+    public static function fetchPublicKey(string $publicKeyKid) {
         $publicKeys = file_get_contents('https://appleid.apple.com/auth/keys');
         $decodedPublicKeys = json_decode($publicKeys, true);
 
